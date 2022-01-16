@@ -9,11 +9,11 @@ class Calculator {
   }
 
   double getlow(double weight) {
-    price = (weight.round() - 3) * 112.50;
+    price = (weight - 3) * 112.50;
     return price!;
   }
   double gethigh(double weight) {
-    price = (weight.round() + 3) * 112.50;
+    price = (weight + 3) * 112.50;
     return price!;
   }
 }
