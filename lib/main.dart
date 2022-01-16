@@ -116,7 +116,7 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                    child: Text('CALCULATE'),
+                    child: const Text('CALCULATE'),
                     onPressed: () {
                       _girth = _girthcontroller.text;
                       _length = _lengthcontroller.text;
