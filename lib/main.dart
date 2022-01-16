@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
                       if (girth != null && length != null) {
                         var weight = cal.getweight(girth, length);
                         var lowprice = cal.getlow(weight);
-                        var hightprice = cal.gethight(weight);
+                        var highprice = cal.gethigh(weight);
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -137,7 +137,7 @@ class HomePage extends StatelessWidget {
                                     Text(
                                         'Weight: ${weight.round() - 3} - ${weight.round() + 3} kg'),
                                     Text(
-                                        'Price: ${lowprice.round()} - ${hightprice.round()} Baht'),
+                                        'Price: ${lowprice.round()} - ${highprice.round()} Baht'),
                                   ],
                                 ),
                               ),

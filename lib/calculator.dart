@@ -12,7 +12,7 @@ class Calculator {
     price = (weight.round() - 3) * 112.50;
     return price!;
   }
-  double gethight(double weight) {
+  double gethigh(double weight) {
     price = (weight.round() + 3) * 112.50;
     return price!;
   }
