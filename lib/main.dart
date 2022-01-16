@@ -34,8 +34,8 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          constraints: BoxConstraints.expand(),
-          decoration: BoxDecoration(
+          constraints: const BoxConstraints.expand(),
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/bg.png'),
               fit: BoxFit.cover,
@@ -130,12 +130,10 @@ class HomePage extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-
-                              title: Text('Result'),
+                              title: const Text('Result'),
                               content: SingleChildScrollView(
                                 child: ListBody(
                                   children: <Widget>[
-
                                     Text(
                                         'Weight: ${weight.round() - 3} - ${weight.round() + 3} kg'),
                                     Text(
@@ -148,7 +146,7 @@ class HomePage extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('OK'),
+                                  child: const Text('OK'),
                                 ),
                               ],
                             );
@@ -161,14 +159,14 @@ class HomePage extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Error!'),
-                                content: Text('Invalid input'),
+                                title: const Text('Error!'),
+                                content: const Text('Invalid input'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: Text('OK'),
+                                    child: const Text('OK'),
                                   ),
                                 ],
                               );
