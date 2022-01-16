@@ -32,44 +32,46 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-          child: Container(
-            constraints: const BoxConstraints.expand(),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/bg.png'),
-                fit: BoxFit.cover,
-              ),
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg.png'),
+              fit: BoxFit.cover,
             ),
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/pig.png', width: 100.0),
-                      Column(
-                        children: [
-                          Text('PIG WEIGHT',
-                              style: TextStyle(
-                                  fontSize: 36.0,
-                                  color: Colors.pink.shade600)),
-                          Text(
-                            'CALCULATOR',
+          ),
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Text('PIG WEIGHT',
                             style: TextStyle(
-                              fontSize: 36.0,
-                              color: Colors.pink.shade600,
-                            ),
+                                fontSize: 36.0, color: Colors.pink.shade600)),
+                        Text(
+                          'CALCULATOR',
+                          style: TextStyle(
+                            fontSize: 36.0,
+                            color: Colors.pink.shade600,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        const SizedBox(width: 50.0),
+                        Image.asset('assets/images/pig.png', width: 300.0),
+                      ],
+                    ),
+                  ],
                 ),
-                Column(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
                     Row(
                       children: [
@@ -88,7 +90,10 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
                     Row(
                       children: [
@@ -107,23 +112,57 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      child: Text('CALCULATE'),
-                      onPressed: () {
-                        _girth = _girthcontroller.text;
-                        _length = _lengthcontroller.text;
-                        double? girth = double.tryParse(_girth!);
-                        double? length = double.tryParse(_length!);
-                        if (girth != null && length != null) {
-                          var weight = cal.getweight(girth, length);
-                          showDialog(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    child: Text('CALCULATE'),
+                    onPressed: () {
+                      _girth = _girthcontroller.text;
+                      _length = _lengthcontroller.text;
+                      double? girth = double.tryParse(_girth!);
+                      double? length = double.tryParse(_length!);
+                      if (girth != null && length != null) {
+                        var weight = cal.getweight(girth, length);
+                        var lowprice = cal.getlow(weight);
+                        var hightprice = cal.gethight(weight);
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+
+                              title: Text('Result'),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+
+                                    Text(
+                                        'Weight: ${weight.round() - 3} - ${weight.round() + 3} kg'),
+                                    Text(
+                                        'Price: ${lowprice.round()} - ${hightprice.round()} Baht'),
+                                  ],
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        _girthcontroller.clear();
+                        _lengthcontroller.clear();
+                      } else {
+                        showDialog(
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Result'),
-                                content: Text('Weight: ${weight.round() - 3} - ${weight.round() + 3} kg'),
+                                title: Text('Error!'),
+                                content: Text('Invalid input'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
@@ -133,33 +172,14 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ],
                               );
-                            },
-                          );
-                          _girthcontroller.clear();
-                          _lengthcontroller.clear();
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('Error!'),
-                                  content: Text('Invalid input'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              });
-                        }
-                      }),
-                ),
-              ],
-            ),
-          )),
+                            });
+                      }
+                    }),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

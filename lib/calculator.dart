@@ -1,14 +1,19 @@
-
-class Calculator{
+class Calculator {
   double? weight;
   double? price;
+  Calculator() {}
 
-  Calculator(){
-  }
-
-  double getweight(double length, double girth){
-    weight = (girth/100) * (girth/100) * (length/100) * 69.3;
+  double getweight(double length, double girth) {
+    weight = (girth / 100) * (girth / 100) * (length / 100) * 69.3;
     return weight!;
   }
 
+  double getlow(double weight) {
+    price = (weight.round() - 3) * 112.50;
+    return price!;
+  }
+  double gethight(double weight) {
+    price = (weight.round() + 3) * 112.50;
+    return price!;
+  }
 }
