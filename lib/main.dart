@@ -152,8 +152,6 @@ class HomePage extends StatelessWidget {
                             );
                           },
                         );
-                        _girthcontroller.clear();
-                        _lengthcontroller.clear();
                       } else {
                         showDialog(
                             context: context,
@@ -171,8 +169,6 @@ class HomePage extends StatelessWidget {
                                 ],
                               );
                             });
-                        _girthcontroller.clear();
-                        _lengthcontroller.clear();
                       }
                     }),
               ),
